@@ -1,74 +1,75 @@
 
 import { motion } from "framer-motion";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Calendar, ArrowRight, Tag, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
 
-const blogCategories = ["All", "Design", "Development", "Career", "Technology"];
+interface BlogPost {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  readTime: string;
+  categories: string[];
+  image: string;
+}
 
-const blogPosts = [
+const blogPosts: BlogPost[] = [
   {
-    title: "Designing for Accessibility: A Comprehensive Guide",
-    excerpt:
-      "Learn how to create inclusive digital experiences that work for everyone regardless of ability or disability.",
-    date: "May 15, 2023",
+    id: "how-i-built-first-ml-model",
+    title: "How I Built My First Machine Learning Model",
+    description: "A step-by-step guide through my journey of building and deploying my first machine learning model for predicting housing prices, including challenges faced and lessons learned.",
+    date: "April 15, 2023",
     readTime: "8 min read",
-    category: "Design",
-    image: "bg-gradient-to-br from-blue-500/20 to-purple-500/20",
-    slug: "#"
+    categories: ["Machine Learning", "Beginner", "Tutorial"],
+    image: "bg-gradient-to-br from-blue-500/20 to-purple-500/20"
   },
   {
-    title: "The Future of JavaScript: What's Coming in ES2023",
-    excerpt:
-      "Explore the upcoming features in JavaScript and how they will change the way we write code.",
-    date: "April 3, 2023",
+    id: "common-mistakes-data-analysis",
+    title: "5 Common Mistakes in Data Analysis",
+    description: "An exploration of frequent pitfalls that data analysts encounter, how to identify them, and practical strategies to avoid these mistakes in your own analytical work.",
+    date: "May 22, 2023",
+    readTime: "6 min read",
+    categories: ["Data Analysis", "Best Practices"],
+    image: "bg-gradient-to-br from-green-500/20 to-teal-500/20"
+  },
+  {
+    id: "data-visualization-principles",
+    title: "Principles of Effective Data Visualization",
+    description: "Discover key principles that make data visualizations more effective, insightful, and accessible to your audience, with practical examples using Python's visualization libraries.",
+    date: "June 10, 2023",
     readTime: "10 min read",
-    category: "Development",
-    image: "bg-gradient-to-br from-green-500/20 to-teal-500/20",
-    slug: "#"
+    categories: ["Data Visualization", "Tutorial"],
+    image: "bg-gradient-to-br from-red-500/20 to-orange-500/20"
   },
   {
-    title: "How to Build a Design System from Scratch",
-    excerpt:
-      "A step-by-step guide to creating a consistent and scalable design system for your products.",
-    date: "March 21, 2023",
-    readTime: "12 min read",
-    category: "Design",
-    image: "bg-gradient-to-br from-orange-500/20 to-red-500/20",
-    slug: "#"
-  },
-  {
-    title: "Optimizing React Performance: Advanced Techniques",
-    excerpt:
-      "Learn how to identify and fix performance bottlenecks in your React applications.",
-    date: "February 18, 2023",
-    readTime: "15 min read",
-    category: "Development",
-    image: "bg-gradient-to-br from-pink-500/20 to-rose-500/20",
-    slug: "#"
-  },
-  {
-    title: "From Developer to Tech Lead: My Journey",
-    excerpt:
-      "Insights and lessons learned from transitioning from an individual contributor to a leadership role.",
-    date: "January 5, 2023",
+    id: "sql-vs-nosql-data-science",
+    title: "SQL vs NoSQL: Which to Choose for Data Science Projects",
+    description: "A comparative analysis of SQL and NoSQL databases specifically for data science applications, with guidance on selecting the right database type for different project requirements.",
+    date: "July 3, 2023",
     readTime: "7 min read",
-    category: "Career",
-    image: "bg-gradient-to-br from-indigo-500/20 to-violet-500/20",
-    slug: "#"
+    categories: ["Databases", "SQL", "MongoDB"],
+    image: "bg-gradient-to-br from-yellow-500/20 to-amber-500/20"
   },
   {
-    title: "The State of Web Development in 2023",
-    excerpt:
-      "An overview of current trends, technologies, and practices in modern web development.",
-    date: "December 12, 2022",
+    id: "time-series-forecasting",
+    title: "Getting Started with Time Series Forecasting",
+    description: "An introduction to time series analysis and forecasting techniques, including practical implementations of ARIMA and LSTM models for predicting stock prices and other time-dependent data.",
+    date: "August 17, 2023",
+    readTime: "12 min read",
+    categories: ["Time Series", "Machine Learning", "Tutorial"],
+    image: "bg-gradient-to-br from-purple-500/20 to-indigo-500/20"
+  },
+  {
+    id: "python-data-cleaning",
+    title: "Python Data Cleaning: A Comprehensive Guide",
+    description: "Learn effective techniques for cleaning and preprocessing data in Python, including handling missing values, outliers, and inconsistent data to prepare high-quality datasets for analysis.",
+    date: "September 5, 2023",
     readTime: "9 min read",
-    category: "Technology",
-    image: "bg-gradient-to-br from-yellow-500/20 to-amber-500/20",
-    slug: "#"
+    categories: ["Python", "Data Cleaning", "Pandas"],
+    image: "bg-gradient-to-br from-pink-500/20 to-rose-500/20"
   }
 ];
-
-const featuredPost = blogPosts[0];
 
 const Blog = () => {
   const containerVariants = {
@@ -99,71 +100,11 @@ const Blog = () => {
             My Blog
           </div>
           <h1 className="text-4xl font-bold tracking-tight mb-4">
-            Thoughts & Insights
+            Data Science Insights
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            I write about design, development, and my experiences in the tech industry.
-            Browse my latest articles below.
+            Sharing my experiences, tutorials, and insights on data science, machine learning, and analytics
           </p>
-        </motion.div>
-
-        {/* Featured Article */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="mb-16"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div
-              className={`aspect-video rounded-lg ${featuredPost.image} flex items-center justify-center p-8`}
-            >
-              <span className="text-5xl opacity-30">
-                {featuredPost.title.charAt(0)}
-              </span>
-            </div>
-            <div className="space-y-4">
-              <div className="text-sm text-primary">{featuredPost.category}</div>
-              <h2 className="text-3xl font-bold">{featuredPost.title}</h2>
-              <p className="text-muted-foreground">{featuredPost.excerpt}</p>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <div className="flex items-center gap-1">
-                  <Calendar className="h-4 w-4" />
-                  {featuredPost.date}
-                </div>
-                <div className="flex items-center gap-1">
-                  <Clock className="h-4 w-4" />
-                  {featuredPost.readTime}
-                </div>
-              </div>
-              <Link
-                to={featuredPost.slug}
-                className="inline-flex items-center text-primary font-medium hover:underline gap-1 mt-2"
-              >
-                Read article <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="flex flex-wrap justify-center gap-2 mb-10"
-        >
-          {blogCategories.map((category, index) => (
-            <button
-              key={index}
-              className={`px-4 py-2 rounded-full text-sm ${
-                index === 0
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary hover:bg-secondary/80"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
         </motion.div>
 
         <motion.div
@@ -172,39 +113,59 @@ const Blog = () => {
           animate="visible"
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {blogPosts.slice(1).map((post, index) => (
-            <motion.div
+          {blogPosts.map((post, index) => (
+            <motion.article
               key={index}
               variants={itemVariants}
-              className="card group"
+              className="card overflow-hidden group flex flex-col h-full"
             >
-              <div
-                className={`aspect-video w-full rounded-md mb-4 ${post.image} flex items-center justify-center`}
-              >
-                <span className="text-3xl opacity-30">
-                  {post.title.charAt(0)}
-                </span>
-              </div>
-              <div className="text-sm text-primary mb-2">{post.category}</div>
-              <h3 className="text-xl font-medium mb-2">{post.title}</h3>
-              <p className="text-muted-foreground mb-4">{post.excerpt}</p>
-              <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <div className="flex items-center gap-1">
-                  <Calendar className="h-4 w-4" />
-                  {post.date}
+              <Link to={`/blog/${post.id}`} className="flex-1 flex flex-col">
+                <div
+                  className={`aspect-video w-full rounded-md mb-4 ${post.image} flex items-center justify-center`}
+                >
+                  <span className="text-4xl opacity-30 font-bold">
+                    {post.title.charAt(0)}
+                  </span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <Clock className="h-4 w-4" />
-                  {post.readTime}
+                
+                <div className="flex gap-4 mb-3 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="h-4 w-4" />
+                    <span>{post.date}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4" />
+                    <span>{post.readTime}</span>
+                  </div>
                 </div>
-              </div>
-              <Link
-                to={post.slug}
-                className="mt-4 inline-block text-primary font-medium hover:underline"
-              >
-                Read more
+                
+                <h3 className="text-xl font-medium mb-2 group-hover:text-primary transition-colors">
+                  {post.title}
+                </h3>
+                
+                <p className="text-muted-foreground mb-4 flex-grow">
+                  {post.description}
+                </p>
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {post.categories.map((category, idx) => (
+                    <Badge
+                      key={idx}
+                      variant="secondary"
+                      className="bg-secondary/50"
+                    >
+                      <Tag className="h-3 w-3 mr-1" />
+                      {category}
+                    </Badge>
+                  ))}
+                </div>
+                
+                <div className="inline-flex items-center text-sm font-medium text-primary gap-1 group-hover:gap-2 transition-all mt-auto">
+                  Read Article
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
               </Link>
-            </motion.div>
+            </motion.article>
           ))}
         </motion.div>
       </section>

@@ -4,7 +4,7 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -45,7 +45,7 @@ export default function Layout() {
           <div className="flex h-16 items-center justify-between">
             <div className="flex-shrink-0">
               <NavLink to="/" className="text-lg font-semibold">
-                John Doe
+                Mohd Anas
               </NavLink>
             </div>
 
@@ -135,14 +135,17 @@ export default function Layout() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} John Doe. All rights reserved.
+              © {new Date().getFullYear()} Mohd Anas. All rights reserved.
             </p>
             <div className="flex space-x-4 mt-4 md:mt-0">
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground">
-                Privacy
+              <a href="https://github.com/" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-muted-foreground hover:text-foreground">
+                <Github className="h-5 w-5" />
               </a>
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground">
-                Terms
+              <a href="https://linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-muted-foreground hover:text-foreground">
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a href="mailto:contact@example.com" aria-label="Email" className="text-muted-foreground hover:text-foreground">
+                <Mail className="h-5 w-5" />
               </a>
             </div>
           </div>
