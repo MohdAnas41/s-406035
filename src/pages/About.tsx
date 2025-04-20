@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { 
   Rocket, Heart, Brain, BookOpen, GraduationCap, Award, 
@@ -63,6 +62,13 @@ const capabilities = [
     description: "Apply statistical methods to derive insights and test hypotheses using real-world data."
   }
 ];
+
+// Define education data
+const educationData = {
+  degree: "Bachelor of Science (Non-Medical)",
+  institution: "Panjab University",
+  description: "Completed a comprehensive program in Non-Medical sciences, building a strong foundation in analytical thinking and scientific methodologies.",
+};
 
 const About = () => {
   const containerVariants = {
@@ -164,6 +170,41 @@ const About = () => {
             </p>
           </motion.div>
         </div>
+      </section>
+
+      {/* Education Section */}
+      <section className="section-container bg-secondary/30">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl font-bold tracking-tight mb-4">Education</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Academic foundation and qualifications
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="max-w-3xl mx-auto"
+        >
+          <div className="card">
+            <div className="flex items-start gap-4">
+              <div className="p-2 rounded-full bg-primary/10">
+                <GraduationCap className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-2">{educationData.degree}</h3>
+                <p className="text-muted-foreground mb-2">{educationData.institution}</p>
+                <p className="text-muted-foreground">{educationData.description}</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* What I Can Do Section */}
